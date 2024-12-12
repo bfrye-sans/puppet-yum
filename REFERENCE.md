@@ -18,7 +18,7 @@
 * [`yum::copr`](#yum--copr): This definition manages Copr (Cool Other Package Repo) repositories.
 * [`yum::gpgkey`](#yum--gpgkey): imports/deleted public GPG key for RPM. Key can be stored on Puppet's fileserver or as inline content.
 * [`yum::group`](#yum--group): This definition installs or removes yum package group.
-* [`yum::install`](#yum--install): Installs/removes rpms from local file/URL via yum install command.
+* [`yum::install`](#yum--install): Installs/removes rpms from local file/URL/repo via yum install command.
 * [`yum::plugin`](#yum--plugin): This definition installs Yum plugin.
 * [`yum::post_transaction_action`](#yum--post_transaction_action): Creates post transaction configuratons for dnf or yum.
 * [`yum::versionlock`](#yum--versionlock): Locks package from updates.
@@ -590,12 +590,16 @@ The following parameters are available in the `yum::install` defined type:
 * [`ensure`](#-yum--install--ensure)
 * [`timeout`](#-yum--install--timeout)
 * [`require_verify`](#-yum--install--require_verify)
+* [`service_name`](#-yum--install--service_name)
+* [`service_status`](#-yum--install--service_status)
+* [`service_enable`](#-yum--install--service_enable)
 
 ##### <a name="-yum--install--source"></a>`source`
 
 Data type: `String`
 
 file or URL where RPM is available
+if installing from enabled repo, use package name
 
 ##### <a name="-yum--install--ensure"></a>`ensure`
 
@@ -620,6 +624,30 @@ Data type: `Boolean`
 optional argument, will reinstall if rpm verify fails
 
 Default value: `false`
+
+##### <a name="-yum--install--service_name"></a>`service_name`
+
+Data type: `Optional[String]`
+
+optional string for service name.  If nothing specified will not process service commands.
+
+Default value: `undef`
+
+##### <a name="-yum--install--service_status"></a>`service_status`
+
+Data type: `Enum['stopped', 'running', 'false', 'true']`
+
+the desired state of the service
+
+Default value: `running`
+
+##### <a name="-yum--install--service_enabled"></a>`service_enabled`
+
+Data type: `Enum['true', 'false', 'manual', 'mask', 'delayed']`
+
+whether a service should be enabled to start at boot
+
+Default value: `true`
 
 ### <a name="yum--plugin"></a>`yum::plugin`
 

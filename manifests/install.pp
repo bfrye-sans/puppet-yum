@@ -36,13 +36,13 @@
 #        service_enable: true
 #
 define yum::install (
-  String                                           $source,
-  Enum['present', 'installed', 'absent', 'purged'] $ensure  = 'present',
-  Boolean                                          $require_verify = false,
-  Optional[Integer]                                $timeout = undef,
-  Optional[String]                                 $service_name = undef,
-  Optional[Boolean]                                $service_status,
-  Optional[Boolean]                                $service_enable,
+  String                                             $source,
+  Enum['present', 'installed', 'absent', 'purged']   $ensure  = 'present',
+  Boolean                                            $require_verify = false,
+  Optional[Integer]                                  $timeout = undef,
+  Optional[String]                                   $service_name = undef,
+  Enum['stopped', 'running', 'false', 'true']        $service_status = 'running',
+  Enum['true', 'false', 'manual', 'mask', 'delayed'] $service_enable = 'true',
 ) {
   Exec {
     path        => '/bin:/usr/bin:/sbin:/usr/sbin',
