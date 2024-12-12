@@ -477,7 +477,7 @@ yum::install { 'package-name':
   require_verify => true,
   service_name => 'sshd',
   service_status => 'running',
-  service_enable => true,
+  service_enable => 'true',
 }
 ```
 
